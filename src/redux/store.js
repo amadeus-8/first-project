@@ -2,13 +2,6 @@ import dialogsReducer from './dialogs-reducer.js';
 import profileReducer from './profile-reducer.js';
 import sidebarReducer from './sidebar-reducer.js';
 
-
-const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
-
-const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY';
-const SEND_MESSAGE = 'SEND-MESSAGE';
-
 let store = {
   _state: {
     profilePage: {
@@ -63,30 +56,10 @@ let store = {
 
 };
 
-export let addPostActionCreator = () => {
-  return {
-    type: ADD_POST
-  };
-}
-export let updateNewsPostTextActionCreator = (text) => {
-  return {
-    type: UPDATE_NEW_POST_TEXT,
-    newText: text
-  };
-}
 
 
-export let sendMessageCreator = () => {
-  return {
-    type: SEND_MESSAGE
-  };
-}
-export let updateNewMessageBodyCreator = (body) => {
-  return {
-    type: UPDATE_NEW_MESSAGE_BODY,
-    body: body
-  };
-}
+
+
 
 
 export default store;
