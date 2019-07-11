@@ -4,7 +4,7 @@ import './App.css';
 import Header from './components/Header/Header.jsx';
 import Navbar from './components/Navbar/Navbar.jsx';
 import Profile from './components/Profile/Profile.jsx';
-import Dialogs from './components/Dialogs/Dialogs.jsx';
+import DialogsContainer from './components/Dialogs/DialogsContainer.jsx';
 import News from './components/News/News.jsx';
 import Music from './components/Music/Music.jsx';
 import Settings from './components/Settings/Settings.jsx';
@@ -17,10 +17,9 @@ const App = (props) => {
         <Navbar />
         <div className="app-wrapper-content">
           <Route path='/profile'
-                 render={() => <Profile profilePage={props.state.profilePage}
-                 dispatch={props.dispatch} />} />
+                 render={() => <Profile store={props.store} />} />
           <Route path='/dialogs'
-                 render={() => <Dialogs store={props.store}/>} />
+                 render={() => <DialogsContainer store={props.store}/>} />
           <Route path='/news' component={News} />
           <Route path='/music' component={Music} />
           <Route path='/settings' component={Settings} />
