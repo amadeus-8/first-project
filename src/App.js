@@ -8,6 +8,7 @@ import DialogsContainer from './components/Dialogs/DialogsContainer.jsx';
 import News from './components/News/News.jsx';
 import Music from './components/Music/Music.jsx';
 import Settings from './components/Settings/Settings.jsx';
+import UsersContainer from './components/Users/UsersContainer.jsx';
 import {Route} from 'react-router-dom';
 
 const App = (props) => {
@@ -17,9 +18,11 @@ const App = (props) => {
         <Navbar />
         <div className="app-wrapper-content">
           <Route path='/profile'
-                 render={() => <Profile store={props.store} />} />
+                 render={() => <Profile />} />
           <Route path='/dialogs'
-                 render={() => <DialogsContainer store={props.store}/>} />
+                 render={() => <DialogsContainer />} />
+          <Route path = '/users'
+                 render={() => <UsersContainer />} />
           <Route path='/news' component={News} />
           <Route path='/music' component={Music} />
           <Route path='/settings' component={Settings} />
