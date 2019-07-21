@@ -1,28 +1,34 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching, toggleFollowingProgress} from '../../redux/users-reducer.js'
+import {follow, unfollow, setCurrentPage, toggleFollowingProgress, getUsers} from '../../redux/users-reducer.js'
 import Users from './Users.jsx';
 import Preloader from '../common/Preloader/Preloader.js';
-import {usersAPI} from '../../api/api.js';
 
 
 class UsersContainer extends React.Component {
   componentDidMount() {
-    this.props.toggleIsFetching(true);
+    this.props.getUsers(this.props.currentPage, this.props.pageSize);
+
+    /*
+    this.props.toggleIsFetching(true); //Это и есть action creator которому мы передаем значение true
     usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
       this.props.toggleIsFetching(false);
       this.props.setUsers(data.items);
       this.props.setTotalUsersCount(data.totalCount);
-    })
+    }) */
   }
 
   onPageChanged = (pageNumber) => {
+
+    this.props.getUsers(pageNumber, this.props.pageSize);
+    /*
     this.props.toggleIsFetching(true);
     this.props.setCurrentPage(pageNumber);
     usersAPI.getUsers(pageNumber, this.props.pageSize).then(data => {
       this.props.toggleIsFetching(false);
       this.props.setUsers(data.items);
     })
+    */
   }
 
   render() {
@@ -35,13 +41,14 @@ class UsersContainer extends React.Component {
                     users={this.props.users}
                     follow={this.props.follow}
                     unfollow={this.props.unfollow}
-                    toggleFollowingProgress={this.props.toggleFollowingProgress}
                     followingInProgress={this.props.followingInProgress}
       />
     </>
   }
 }
 
+
+//сюда приходит полный state который возвращается со store, state = store.getState()
 const mapStateToProps = (state) => {
   return {
     users: state.usersPage.users,
@@ -53,6 +60,7 @@ const mapStateToProps = (state) => {
   }
 }
 
+//сюда параметром он передаст store.dispatch.bind(store)
 /*const mapDispatchToProps = (dispatch) => {
   return {
     follow: (userId) => {
@@ -85,9 +93,9 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
   follow,
   unfollow,
-  setUsers,
   setCurrentPage,
-  setTotalUsersCount,
-  toggleIsFetching,
-  toggleFollowingProgress
+  toggleFollowingProgress,
+  getUsers
 })(UsersContainer);
+
+//<UsersContainer users={state.usersPage.users} follow={follow} ... />
